@@ -13,9 +13,21 @@ __all__ = ['common_doms',
            'OOMFormatter',
           ]
 
-def printer(string, num_char=100,char='#'):
-    print(('{:'+char+'^'+str(num_char)+'}').format(' '.join([' ',string,' '])))
-    return None
+#def printer(string, num_char=100,char='#'):
+#    print(('{:'+char+'^'+str(num_char)+'}').format(' '.join([' ',string,' '])))
+#    return None
+
+# A decorator for printing titles
+def better_print(func):
+    def wrapper(*args):
+        arg = ' '+ ' '.join(args) + ' '
+        func('{:#^70}'.format(arg))
+        
+    return wrapper
+
+@better_print
+def printer(*args):
+    print(*args)
 
 def common_doms(paths):
     """

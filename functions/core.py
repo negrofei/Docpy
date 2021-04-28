@@ -241,6 +241,12 @@ def get_poweroften(m):
 utils = {'box': [-65.9654, -52.6832, -36.535, -25.279],
          #'box': [-65.9654, -52.6832, -37.0476, -25.279],
          'box15': [-65.9654, -50.1452, -34.9963, -22.9669],
-         'boxHR3':[-75.7255, -48.5243, -35.8541, -16.1369]  #HR3 sin los bordes de relaxation zone
+         'boxHR3':[-75.7255, -48.5243, -35.8541, -16.1369],     # HR3 sin los bordes de relaxation 
+                                                                # zone (~22 puntos)
+         'boxHR3M': [-72.0852, -52.2047, -32.0510, -19.8475],   # HR3 sin los bordes de relajacion 
+                                                                # pero dados por Matte2017: le saco
+                                                                # 118 puntos de reticula (J~19.7)
+         'boxHR3M2':[-73.1112, -51.1787, -33.0770, -18.8215],   # igual pero con 91 puntos (llego al
+                                                                # 90% de la curva exponencial)
          }
 

@@ -20,8 +20,9 @@ __all__ = ['common_doms',
 # A decorator for printing titles
 def better_print(func):
     def wrapper(*args):
+        args = [str(arg) for arg in args]
         arg = ' '+ ' '.join(args) + ' '
-        func('{:#^70}'.format(arg))
+        func('{:#^90}'.format(arg))
         
     return wrapper
 
@@ -144,10 +145,11 @@ def delta_time_runs(path='./run_wrf.log'):
     t_ini = datetime.strptime(lines[0][:-1], '%a %b %d %H:%M:%S ART %Y')
     t_fin = datetime.strptime(lines[-1][:-1], '%a %b %d %H:%M:%S ART %Y')
     delta = t_fin-t_ini
-    hours, remainder = divmod(delta.seconds, 3600)
-    minutes, seconds = divmod(remainder, 60)
-    print('{:02}:{:02}:{:02}'.format(int(hours), int(minutes), int(seconds)))
-    return hours, minutes, seconds
+    #hours, remainder = divmod(delta.seconds, 3600)
+    #minutes, seconds = divmod(remainder, 60)
+    #print('{:02}:{:02}:{:02}'.format(int(hours), int(minutes), int(seconds)))
+    #return hours, minutes, seconds
+    return delta
 
 def nodes_ppn_runs(path='./run_wrf.pbs'):
     with open(path, 'r') as f:
@@ -178,7 +180,7 @@ def get_namelist_info(path='./namelist.input'):
         timestep.append( int(int(time_line.split(',')[0])/int(ratio_line.split(',')[N])) )
         hist_line = [line for line in lines if 'history_interval' in line][0].split('=')[1]
         history.append( int(hist_line.split(',')[0]) ) 
-    return [resolution, Npoints, timestep, history]    
+    return resolution, Npoints, timestep, history    
 
 #def save_fig(fig_id, IMAGES_PATH=ruta_figs, tight_layout=True, fig_extension="png", resolution=300):
 #    path = os.path.join(IMAGES_PATH, fig_id + "." + fig_extension)

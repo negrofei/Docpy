@@ -7,10 +7,12 @@ from .core import *
 from . import precip
 from . import campos
 from . import functions
+from . import plot
 __all__ = [core.__all__,
            'functions'
            'precip',
            'campos',
+           'plot',
            ]
 
 

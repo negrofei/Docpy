@@ -249,6 +249,9 @@ utils = {'box': [-65.9654, -52.6832, -36.535, -25.279],
                                                                 # pero dados por Matte2017: le saco
                                                                 # 118 puntos de reticula (J~19.7)
          'boxHR3M2':[-73.1112, -51.1787, -33.0770, -18.8215],   # igual pero con 91 puntos (llego al
-                                                                # 90% de la curva exponencial)
+                                                                # 90% de la curva exponencial)  
+         'boxHR3-50':[-74.5603, -49.7297, -34.7439, -17.1546],  # HR3 sin los bordes de relaxation
+                                                                # zone (50 puntos)
+         'boxHR3-44':[-74.8014, -49.4886, -34.9588, -16.9397],
          }
 

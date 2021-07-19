@@ -268,7 +268,10 @@ class ERAI:
         - return: numpy.array, array of vertical levels
 
         """
-        lev = self.data_netcdf.variables['plev'][:]
+        if self.name == 'erai':
+            lev = self.data_netcdf.variables['plev'][:]/100
+        else:
+            lev = self.data_netcdf.variables['plev'][:]
         return lev
 
     def get_variables(self,var):
@@ -276,7 +279,7 @@ class ERAI:
         - return: numpy.array, array with the selected field
 
         """
-        var = self.data_netcdf.variables[var][:,:,::-1,:]
+        var = self.data_netcdf.variables[self.dvars_era[var]][:,:,::-1,:]
         return var
 
        

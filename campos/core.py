@@ -22,7 +22,7 @@ def calc_z_lvl(case, lvl):
     elif case.name == 'era5':
         geopt = 'z'
     elif case.name == 'erai':
-        geopt = case.dvars_era['Z']
+        geopt = 'Z'#case.dvars_era['Z']
     z = case.get_variables(geopt)[:, (list(lev).index(lvl)),:,:]/g
 
     return z
@@ -125,9 +125,9 @@ def calc_Vq_integrated(case, delta_t):
                 'v':'v',
                 'q':'q'},
             'erai':{
-                'u':'var131',
-                'v':'var132',
-                'q':'var133'},
+                'u':'U',
+                'v':'V',
+                'q':'HUS'},
             }
     u_name = dvars[case.name]['u']
     v_name = dvars[case.name]['v']
@@ -139,18 +139,18 @@ def calc_Vq_integrated(case, delta_t):
         hus = qvapor/(1+qvapor) #kg/kg
         del qvapor
     elif (case.name=='era5') or (case.name=='erai'):
-        hus = case.get_variables(q_name)
+        hus = case.get_variables(q_name)[::int(delta_t/delta_t_hs),:,:,:]
 
     qu = ua*hus #m kg / s kg
     qv = va*hus
     del hus
     # calculo la integral
-    dps = np.diff(lvls[::-1]) #hpa
+    dps = np.diff(lvls)#[::-1]) #hpa
     capax = np.zeros_like(qu)
     capay = np.zeros_like(qv)
     
     if case.name == 'erai':
-        factor = 1
+        factor = 100
     else:
         factor = 100
     for l in range(len(dps)):
